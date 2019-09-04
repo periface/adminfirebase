@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './admin.component.html',
@@ -9,8 +9,10 @@ export class AdminComponent implements OnInit {
   /**
    *
    */
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
   ngOnInit(): void {
-    this.router.navigate(['admin', 'dashboard']);
+    if (this.router.url === '/admin') {
+      this.router.navigate(['admin', 'dashboard']);
+    }
   }
 }
