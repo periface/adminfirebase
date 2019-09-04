@@ -2,6 +2,40 @@
   <div class="login-form-container">
     <div class="login-card">
       <h2 class="text-center">Bienvenido (a)</h2>
+      <form [formGroup]="form">
+        <div class="form-field-container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Correo"
+              formControlName="email"
+              required
+            />
+            <mat-error *ngIf="this.form.controls.email.invalid">{{
+              getErrorMessage('email')
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-field-container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Contraseña"
+              formControlName="password"
+              required
+              type="password"
+            />
+            <mat-error *ngIf="this.form.controls.password.invalid">{{
+              getErrorMessage('password')
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-field-container">
+          <button type="submit" mat-raised-button color="primary">
+            Iniciar Sesión
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -2,15 +2,26 @@
   width: 100%;
   margin: 0 auto;
   height: 100vh;
+  background: url(https://www.navitasventures.com/wp-content/uploads/2016/06/Material-design-background-514054880_2126x1416-1024x682.jpeg);
   .login-form-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 35%;
+    width: 30%;
     .login-card {
+      border-radius: 5px;
+      background: white;
       padding: 10px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
   }
+}
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field-container > * {
+  width: 100%;
 }
