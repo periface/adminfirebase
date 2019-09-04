@@ -2,7 +2,7 @@
   <div class="login-form-container">
     <div class="login-card">
       <h2 class="text-center">Bienvenido (a)</h2>
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit)="login()">
         <div class="form-field-container">
           <mat-form-field>
             <input
@@ -31,9 +31,16 @@
           </mat-form-field>
         </div>
         <div class="form-field-container">
-          <button type="submit" mat-raised-button color="primary">
+          <button
+            [disabled]="!this.form.valid"
+            type="submit"
+            mat-raised-button
+            color="primary"
+          >
             Iniciar Sesión
           </button>
+          <hr *ngIf="this.message" />
+          <mat-error *ngIf="this.message">{{ this.message }}</mat-error>
         </div>
       </form>
     </div>

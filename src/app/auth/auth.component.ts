@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './auth.component.html',
@@ -10,7 +12,12 @@ export class AuthComponent implements OnInit {
    *
    */
   form: FormGroup;
-  constructor(private formbuilder: FormBuilder) {}
+  message: any;
+  constructor(
+    private formbuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.form = this.formbuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -22,5 +29,24 @@ export class AuthComponent implements OnInit {
       return 'Contraseña no valida';
     }
     return 'Correo no valido';
+  }
+  async login() {
+    try {
+      const result = await this.authService.login({
+        email: this.form.value.email,
+        password: this.form.value.password
+      });
+      if (result.user) {
+        this.router.navigate(['admin']);
+      }
+    } catch (error) {
+      this.message = this.getAuthErrorMessage(error.code);
+    }
+  }
+  getAuthErrorMessage(code: string) {
+    if (code === 'auth/user-not-found') {
+      return 'Error de inicio de sesión';
+    }
+    return 'Error de inicio de sesión';
   }
 }
