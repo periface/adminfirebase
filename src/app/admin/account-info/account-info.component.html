@@ -1,5 +1,46 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
-  <div fxFlexAlign="center">
-    <h2>Información de usuario</h2>
+<div fxLayout="row" fxLayout.xs="column">
+  <div fxFlex="75" fxFlexAlign="center">
+    <div class="form-container">
+      <div class="form-field-container">
+        <form [formGroup]="form" (ngSubmit)="login()">
+          <div class="form-field-container">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Nombre"
+                formControlName="name"
+                required
+              />
+              <!-- <mat-error *ngIf="this.form.controls.email.invalid">{{
+                getErrorMessage('email')
+              }}</mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="form-field-container">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Apellidos"
+                formControlName="surname"
+                required
+              />
+              <!-- <mat-error *ngIf="this.form.controls.password.invalid">{{
+                getErrorMessage('password')
+              }}</mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="form-field-container">
+            <button
+              [disabled]="!this.form.valid"
+              type="submit"
+              mat-raised-button
+              color="primary"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
