@@ -1,8 +1,11 @@
 <div fxLayout="row" fxLayout.xs="column">
-  <div fxFlex="75" fxFlexAlign="center">
+  <div fxFlex="100" fxFlexAlign="center">
     <div class="form-container">
-      <div class="form-field-container">
-        <form [formGroup]="form" (ngSubmit)="login()">
+      <h3 class="text-center">
+        Información de cuenta
+      </h3>
+      <div *ngIf="this.form" class="form-field-container">
+        <form [formGroup]="form" (ngSubmit)="save()">
           <div class="form-field-container">
             <mat-form-field>
               <input
@@ -27,6 +30,19 @@
               <!-- <mat-error *ngIf="this.form.controls.password.invalid">{{
                 getErrorMessage('password')
               }}</mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="form-field-container">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Telefono"
+                formControlName="phoneNumber"
+                type="tel"
+              />
+              <!-- <mat-error *ngIf="this.form.controls.password.invalid">{{
+                  getErrorMessage('password')
+                }}</mat-error> -->
             </mat-form-field>
           </div>
           <div class="form-field-container">

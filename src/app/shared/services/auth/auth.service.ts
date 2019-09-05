@@ -9,11 +9,17 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   user: Observable<firebase.User>;
+  userSnapshot: firebase.User;
   /**
    *
    */
   constructor(private afa: AngularFireAuth) {
     this.user = afa.user;
+    this.user.subscribe(usr => {
+      if (usr) {
+        this.userSnapshot = usr;
+      }
+    });
   }
   login(input: IAuthModel): Promise<firebase.auth.UserCredential> {
     return this.afa.auth.signInWithEmailAndPassword(

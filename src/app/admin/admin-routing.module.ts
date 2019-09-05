@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    canActivate: [AngularFireAuthGuard],
+
     children: [
       {
         path: 'dashboard',

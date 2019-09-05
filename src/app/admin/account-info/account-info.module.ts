@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { AccountInfoComponent } from './account-info.component';
 import { AccountInfoRoutingModule } from './account-info-routing.module';
