@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav role="navigation">
+  <mat-sidenav [mode]="'push'" #sidenav role="navigation">
     <!--this is a place for us to add side-nav code-->
     <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
   </mat-sidenav>

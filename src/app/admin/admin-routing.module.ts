@@ -2,7 +2,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
@@ -21,6 +20,11 @@ const routes: Routes = [
           import('./account-info/account-info.module').then(
             m => m.AccountInfoModule
           )
+      },
+      {
+        path: 'accounts',
+        loadChildren: () =>
+          import('./accounts/accounts.module').then(m => m.AccountsModule)
       }
     ]
   }

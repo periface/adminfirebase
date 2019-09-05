@@ -1,5 +1,5 @@
-<div fxLayout="row" fxLayout.xs="column">
-  <div fxFlex="100" fxFlexAlign="center">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+  <div fxFlex="65" fxFlexAlign="center">
     <div class="form-container">
       <h3 class="text-center">
         Información de cuenta
@@ -47,7 +47,7 @@
           </div>
           <div class="form-field-container">
             <button
-              [disabled]="!this.form.valid"
+              [disabled]="!this.form.valid || this.saving"
               type="submit"
               mat-raised-button
               color="primary"

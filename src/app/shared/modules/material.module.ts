@@ -8,7 +8,9 @@ import {
   MatListModule,
   MatInputModule,
   MatFormFieldModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSnackBarModule,
+  MatTableModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
@@ -21,7 +23,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule,
+    MatTableModule
   ],
   exports: [
     MatSidenavModule,
@@ -32,7 +36,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule,
+    MatTableModule
   ]
 })
 export class MaterialModule {}
