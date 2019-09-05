@@ -30,13 +30,13 @@ export class AccountService {
               | firebase.firestore.CollectionReference
               | firebase.firestore.Query = ref;
             if (name) {
-              query = query.where('name', 'array-contains', name);
+              query = query.where('name', '==', name);
             }
-            query.limit(10);
             query.orderBy('name', 'desc');
             if (pageFilter) {
               query.startAfter(this.lastInResponse);
             }
+            query.limit(10);
             return query;
           }
         ))
