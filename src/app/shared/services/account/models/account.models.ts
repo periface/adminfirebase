@@ -4,8 +4,10 @@ export interface IUserAccount {
   surname: string;
   username: string;
   phoneNumber: string;
+  permissions: string[];
 }
 export class UserAccount implements IUserAccount {
+  permissions: string[];
   id?: string;
   username: string;
   phoneNumber: string;

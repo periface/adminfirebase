@@ -1,0 +1,76 @@
+<button
+  (click)="this.finished.emit(null)"
+  mat-icon-button
+  aria-label="icon-button with a heart icon"
+>
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<span class="name">{{ this.account.name }} {{ this.account.surname }}</span>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-tab-group>
+    <mat-tab label="Información">
+      <div *ngIf="this.form" class="form-container">
+        <div class="form-field-container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Nombre"
+              formControlName="name"
+              required
+            />
+            <!-- <mat-error *ngIf="this.form.controls.email.invalid">{{
+                      getErrorMessage('email')
+                    }}</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="form-field-container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Apellidos"
+              formControlName="surname"
+              required
+            />
+            <!-- <mat-error *ngIf="this.form.controls.password.invalid">{{
+                      getErrorMessage('password')
+                    }}</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="form-field-container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Telefono"
+              formControlName="phoneNumber"
+              type="tel"
+            />
+            <!-- <mat-error *ngIf="this.form.controls.password.invalid">{{
+                        getErrorMessage('password')
+                      }}</mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Permisos">
+      <div class="form-container checkbox">
+        <mat-checkbox
+          class="margin"
+          *ngFor="let permission of permissions"
+          (change)="setPermission($event, permission)"
+          [checked]="checkPermission(permission)"
+          >{{ permission.displayName }}</mat-checkbox
+        >
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="form-field-container button-container">
+    <button
+      [disabled]="!this.form.valid || this.saving"
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Guardar
+    </button>
+  </div>
+</form>

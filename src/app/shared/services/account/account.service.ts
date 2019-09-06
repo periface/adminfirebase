@@ -16,8 +16,8 @@ export class AccountService {
   items$: Observable<UserAccount[]>;
   nameFilter$: BehaviorSubject<string | null>;
   pageFilter$: BehaviorSubject<number | null>;
-  firstInResponse: UserAccount;
-  lastInResponse: UserAccount;
+  firstInResponse: any = [];
+  lastInResponse: any = [];
   constructor(private afs: AngularFirestore) {
     this.nameFilter$ = new BehaviorSubject(null);
     this.pageFilter$ = new BehaviorSubject(null);
@@ -33,8 +33,11 @@ export class AccountService {
               query = query.where('name', '==', name);
             }
             query.orderBy('name', 'desc');
-            if (pageFilter) {
+            if (pageFilter === 1) {
               query.startAfter(this.lastInResponse);
+            }
+            if (pageFilter === 0) {
+              query.startAt(this.firstInResponse);
             }
             query.limit(10);
             return query;
@@ -44,10 +47,8 @@ export class AccountService {
           .pipe(
             map(actions => {
               if (actions.length) {
-                this.firstInResponse = actions[0].payload.doc.data();
-                this.lastInResponse = actions[
-                  actions.length - 1
-                ].payload.doc.data();
+                this.firstInResponse = actions[0].payload.doc;
+                this.lastInResponse = actions[actions.length - 1].payload.doc;
               }
 
               return actions.map(a => {

@@ -1,0 +1,32 @@
+.name {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.form-container {
+  // width: 50%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field-container > * {
+  width: 100%;
+}
+.button-container {
+  width: 25%;
+}
+.form-container {
+  padding-top: 10px;
+  min-height: 100px;
+}
+.checkbox {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.margin {
+  margin: 0 10px;
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { AccountService } from '../shared/services/account/account.service';
 
 @Component({
   templateUrl: './auth.component.html',
@@ -16,7 +17,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private account: AccountService
   ) {}
   ngOnInit(): void {
     this.form = this.formbuilder.group({

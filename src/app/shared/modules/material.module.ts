@@ -11,7 +11,9 @@ import {
   MatDialogModule,
   MatSnackBarModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatMenuModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
@@ -27,7 +29,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDialogModule,
     MatSnackBarModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule,
+    MatTabsModule,
+    MatCheckboxModule
   ],
   exports: [
     MatSidenavModule,
@@ -41,7 +46,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDialogModule,
     MatSnackBarModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule,
+    MatTabsModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule {}
