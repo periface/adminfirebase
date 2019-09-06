@@ -46,6 +46,11 @@ export class AccountInfoComponent implements OnInit {
       this.snackBar.open('Cambios guardados...', 'OK', {
         duration: 3000
       });
+      this.authService.userSnapshot.updateProfile({
+        displayName: `${this.form.value.name} ${this.form.value.surname}`,
+        photoURL:
+          'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+      });
     } catch (error) {
       this.saving = false;
     }

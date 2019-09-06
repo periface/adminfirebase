@@ -13,7 +13,7 @@ export class AuthService {
   /**
    *
    */
-  constructor(private afa: AngularFireAuth) {
+  constructor(public afa: AngularFireAuth) {
     this.user = afa.user;
     this.user.subscribe(usr => {
       if (usr) {
