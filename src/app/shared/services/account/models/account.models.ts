@@ -5,6 +5,7 @@ export interface IUserAccount {
   username: string;
   phoneNumber: string;
   permissions: string[];
+  email: string;
 }
 export class UserAccount implements IUserAccount {
   permissions: string[];
@@ -13,4 +14,5 @@ export class UserAccount implements IUserAccount {
   phoneNumber: string;
   name: string;
   surname: string;
+  email: string;
 }

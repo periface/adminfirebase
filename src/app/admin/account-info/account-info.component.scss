@@ -11,3 +11,17 @@
 .form-field-container > * {
   width: 100%;
 }
+.button-card {
+  text-align: center;
+  width: 40%;
+  margin: 0 auto;
+  cursor: pointer;
+  img {
+    padding: 10px;
+    width: 128px;
+    height: 128px;
+  }
+}
+.options {
+  margin-top: 20px;
+}

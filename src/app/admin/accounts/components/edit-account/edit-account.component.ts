@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/shared/services/account/account.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MatSnackBar, MatCheckboxChange } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './edit-account.component.html',
@@ -25,33 +26,69 @@ export class EditAccountComponent implements OnInit {
     private accountService: AccountService,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
   cancel() {
     this.finished.emit(null);
+    this.account = null;
   }
   ngOnInit(): void {
-    this.buildDefaultForm(this.account);
-    this.selectedPermissions = this.account.permissions || [];
+    if (this.account) {
+      this.buildDefaultForm(this.account);
+      this.selectedPermissions = this.account.permissions || [];
+    } else {
+      this.buildDefaultForm(null);
+      this.selectedPermissions = [];
+    }
   }
   async save() {
     try {
-      this.saving = true;
-      const accountInfo = {
-        ...this.form.value,
-        permissions: this.selectedPermissions
-      };
-      await this.accountService.updateAccount({
-        id: this.authService.userSnapshot.uid,
-        account: accountInfo
-      });
-      this.saving = false;
-      this.snackBar.open('Cambios guardados...', 'OK', {
-        duration: 3000
-      });
+      if (this.account) {
+        this.edit();
+      } else {
+        this.create();
+      }
     } catch (error) {
       this.saving = false;
     }
+  }
+  private async create() {
+    this.saving = true;
+    const accountInfo = {
+      ...this.form.value,
+      permissions: this.selectedPermissions
+    };
+    const user = await this.authService.afa.auth.createUserWithEmailAndPassword(
+      this.form.value.email,
+      '123qwe'
+    );
+    await this.accountService.createAccount({
+      id: user.user.uid,
+      account: accountInfo
+    });
+
+    this.saving = false;
+    this.snackBar.open('Cambios guardados...', 'OK', {
+      duration: 3000
+    });
+    this.finished.emit(null);
+  }
+  private async edit() {
+    this.saving = true;
+    const accountInfo = {
+      ...this.form.value,
+      permissions: this.selectedPermissions
+    };
+    await this.accountService.updateAccount({
+      id: this.account.id,
+      account: accountInfo
+    });
+    this.saving = false;
+    this.snackBar.open('Cambios guardados...', 'OK', {
+      duration: 3000
+    });
+    this.finished.emit(null);
   }
   setPermission(event: MatCheckboxChange, permission: any) {
     if (event.checked) {
@@ -66,12 +103,10 @@ export class EditAccountComponent implements OnInit {
       const found = this.selectedPermissions.findIndex(
         a => a === permission.permissionName
       );
-      console.log(found);
       if (found > -1) {
         this.selectedPermissions.splice(found, 1);
       }
     }
-    console.log(this.selectedPermissions);
   }
   private buildDefaultForm(data?: UserAccount) {
     if (data) {
@@ -82,6 +117,7 @@ export class EditAccountComponent implements OnInit {
       });
     } else {
       this.form = this.formBuilder.group({
+        email: ['johnDoe@web.com', Validators.required],
         name: ['John', Validators.required],
         surname: ['Doe', Validators.required],
         phoneNumber: ['555555']
@@ -89,6 +125,9 @@ export class EditAccountComponent implements OnInit {
     }
   }
   checkPermission(permission) {
+    if (!this.account) {
+      return;
+    }
     if (!this.account.permissions) {
       return false;
     }

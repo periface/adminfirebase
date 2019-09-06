@@ -14,6 +14,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   editableItem: UserAccount;
   subscription: Subscription;
+  showEdit: boolean;
   constructor(private accountService: AccountService) {
     this.subscription = this.accountService.items$.subscribe(
       data => {
@@ -47,10 +48,14 @@ export class AccountsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   edit(item: UserAccount) {
-    console.log(item);
     this.editableItem = item;
+    this.showEdit = true;
   }
   onFinished($event) {
+    this.showEdit = false;
     this.editableItem = null;
+  }
+  createAccount() {
+    this.showEdit = true;
   }
 }

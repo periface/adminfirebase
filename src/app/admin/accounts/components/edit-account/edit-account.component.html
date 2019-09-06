@@ -5,11 +5,27 @@
 >
   <mat-icon>arrow_back</mat-icon>
 </button>
-<span class="name">{{ this.account.name }} {{ this.account.surname }}</span>
+<span *ngIf="this.account" class="name"
+  >{{ this.account.name }} {{ this.account.surname }}</span
+>
+<span *ngIf="!this.account" class="name">Crear usuario</span>
 <form [formGroup]="form" (ngSubmit)="save()">
   <mat-tab-group>
     <mat-tab label="Información">
       <div *ngIf="this.form" class="form-container">
+        <div *ngIf="!this.account" class="form-field-container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Email"
+              formControlName="email"
+              required
+            />
+            <!-- <mat-error *ngIf="this.form.controls.email.invalid">{{
+                          getErrorMessage('email')
+                        }}</mat-error> -->
+          </mat-form-field>
+        </div>
         <div class="form-field-container">
           <mat-form-field>
             <input
@@ -52,7 +68,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Permisos">
-      <div class="form-container checkbox">
+      <div *ngIf="this.permissions.length" class="form-container checkbox">
         <mat-checkbox
           class="margin"
           *ngFor="let permission of permissions"

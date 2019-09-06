@@ -88,5 +88,7 @@ export class AccountService {
   }): Promise<void> {
     return this.afs.doc<UserAccount>(`users/${id}`).set(account);
   }
-  createAccount(account: IUserAccount) {}
+  createAccount(input: { id: string; account: IUserAccount }): Promise<void> {
+    return this.afs.doc(`users/${input.id}`).set(input.account);
+  }
 }

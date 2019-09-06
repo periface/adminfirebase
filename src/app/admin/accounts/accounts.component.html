@@ -1,5 +1,5 @@
 <div
-  *ngIf="!this.editableItem"
+  *ngIf="!this.showEdit"
   fxLayout="row"
   fxLayout.xs="column"
   fxLayoutAlign="center center"
@@ -9,7 +9,7 @@
   </div>
 </div>
 <div
-  *ngIf="!editableItem"
+  *ngIf="!this.showEdit"
   fxLayout="row"
   fxLayout.xs="column"
   fxLayoutAlign="center center"
@@ -86,11 +86,20 @@
       >
         Siguiente
       </button>
+
+      <button
+        class="flat-button"
+        mat-flat-button
+        color="accent"
+        (click)="createAccount()"
+      >
+        Crear
+      </button>
     </div>
   </div>
 </div>
 <div
-  *ngIf="editableItem"
+  *ngIf="showEdit"
   fxLayout="row"
   fxLayout.xs="column"
   fxLayoutAlign="center center"
