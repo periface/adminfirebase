@@ -8,7 +8,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['name', 'surname', 'phoneNumber', 'options'];
+  displayedColumns: string[] = [
+    'name',
+    'surname',
+    'email',
+    'phoneNumber',
+    'options'
+  ];
   dataSource: MatTableDataSource<UserAccount> = new MatTableDataSource([]);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

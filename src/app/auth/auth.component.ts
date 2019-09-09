@@ -14,6 +14,8 @@ export class AuthComponent implements OnInit {
    */
   form: FormGroup;
   message: any;
+  showRecoverForm: boolean;
+  recoveryEmail: string;
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthService,
@@ -50,5 +52,8 @@ export class AuthComponent implements OnInit {
       return 'Error de inicio de sesión';
     }
     return 'Error de inicio de sesión';
+  }
+  recoverPassword() {
+    this.authService.afa.auth.sendPasswordResetEmail(this.recoveryEmail);
   }
 }

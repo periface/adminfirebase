@@ -1,8 +1,15 @@
 <div class="main">
   <div class="login-form-container">
     <div class="login-card">
-      <h2 class="text-center">Bienvenido (a)</h2>
-      <form [formGroup]="form" (ngSubmit)="login()">
+      <h2 *ngIf="!this.showRecoverForm" class="text-center">Bienvenido (a)</h2>
+      <p *ngIf="this.showRecoverForm" class="text-center">
+        Ingrese correo electrónico
+      </p>
+      <form
+        *ngIf="!this.showRecoverForm"
+        [formGroup]="form"
+        (ngSubmit)="login()"
+      >
         <div class="form-field-container">
           <mat-form-field>
             <input
@@ -39,10 +46,43 @@
           >
             Iniciar Sesión
           </button>
+          <br />
+          <a (click)="this.showRecoverForm = !this.showRecoverForm"
+            >Olvide mi contraseña</a
+          >
+
           <hr *ngIf="this.message" />
           <mat-error *ngIf="this.message">{{ this.message }}</mat-error>
         </div>
       </form>
+      <div *ngIf="this.showRecoverForm" class="form-field-container">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Correo"
+            required
+            type="email"
+            [(ngModel)]="this.recoveryEmail"
+          />
+        </mat-form-field>
+
+        <button
+          style="width: 50%;float: left;"
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="this.recoverPassword()"
+        >
+          Recuperar contraseña
+        </button>
+        <br />
+        <a
+          style="width: 30%;float: left;"
+          (click)="this.showRecoverForm = !this.showRecoverForm"
+        >
+          Cancelar
+        </a>
+      </div>
     </div>
   </div>
 </div>

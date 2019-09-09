@@ -113,7 +113,9 @@ export class EditAccountComponent implements OnInit {
       this.form = this.formBuilder.group({
         name: [data.name, Validators.required],
         surname: [data.surname, Validators.required],
-        phoneNumber: [data.phoneNumber]
+        phoneNumber: [data.phoneNumber],
+        email: [data.email],
+        permissions: [data.permissions]
       });
     } else {
       this.form = this.formBuilder.group({

@@ -38,9 +38,13 @@ export class AccountInfoComponent implements OnInit {
   async save() {
     try {
       this.saving = true;
+      const accounInfo = {
+        ...this.form.value,
+        email: this.authService.userSnapshot.email
+      };
       await this.accountService.updateAccount({
         id: this.authService.userSnapshot.uid,
-        account: this.form.value
+        account: accounInfo
       });
       this.saving = false;
       this.snackBar.open('Cambios guardados...', 'OK', {
@@ -63,7 +67,8 @@ export class AccountInfoComponent implements OnInit {
       this.form = this.formBuilder.group({
         name: [data.name, Validators.required],
         surname: [data.surname, Validators.required],
-        phoneNumber: [data.phoneNumber]
+        phoneNumber: [data.phoneNumber],
+        permissions: [data.permissions]
       });
     } else {
       this.form = this.formBuilder.group({
